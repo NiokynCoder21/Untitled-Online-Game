@@ -25,15 +25,14 @@ public class Weapon : MonoBehaviour
     public float reloadAmount; // this will store the current reload ammount
     public float maxReload = 2f; //what is the max amounts of reloads the gun has
 
-    public Text currentAmmoText; //text that shows current ammo amount
-    public Text maxAmmoText; //text that shows the max ammo amount
+    public TextMeshProUGUI currentAmmoText; //text that shows current ammo amount
+    public TextMeshProUGUI maxAmmoText; //text that shows the max ammo amount
 
     public bool isReloading = false; //bool to check if player is reloading
 
     public float distance = 50f; //how player the raycast shoots for interaction
     public GameObject ammo; //to assign in scence 
 
-    public GameObject noteUI; //to assign noteUi in scence
     public float fireRateInSec = 3f; //how long the player has to wait between shots
 
     public Camera cam; //to assign camera in scence 
@@ -47,7 +46,6 @@ public class Weapon : MonoBehaviour
         reloadAmount = maxReload; //set reload amount to max relaod 
         UpdateAmmoUI(); //update the ammo ui
         Text interactableText = GetComponent<Text>(); //get component text and store as interactable text
-        noteUI.SetActive(false); //set noteui game object to false so it is not active in the scence
         TextMeshProUGUI newText = GetComponent<TextMeshProUGUI>(); //get component textmeshprogui and store as new text
     }
 
@@ -105,18 +103,6 @@ public class Weapon : MonoBehaviour
                 }
             }
 
-            if(hitTag == "Note") //check if hittag has the tag note
-            {
-                if (Input.GetKeyDown(KeyCode.I)) //if player presses I
-                {
-                    noteUI.SetActive(true); //which shows a note on screen
-                }
-            }
-
-            else
-            {
-                noteUI.SetActive(false); //if player not in range disable note and not show it on screen
-            }
 
             if (hitTag == "win")
             {

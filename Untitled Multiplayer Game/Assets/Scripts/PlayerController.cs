@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public float controllerSensitivty; //player controller sensitivty for camera movement 
     public float currentSensitivity; //the players current sensitivity 
     private float lookRotation; //keep track of current look rotation
-    public float maxForce; //the max force that can be applied on the player
+    public float maxForce; //the max force that can be applied on the playere
 
 
     public void OnMove(InputAction.CallbackContext context)  
