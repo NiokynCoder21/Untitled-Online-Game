@@ -129,7 +129,7 @@ public class Weapon : MonoBehaviour
     {
         muzzleflash.Play(); //play muzzle flash particle system
 
-        RaycastHit hit;
+        //RaycastHit hit;
 
             currentAmmo--;
             UpdateAmmoUI();
