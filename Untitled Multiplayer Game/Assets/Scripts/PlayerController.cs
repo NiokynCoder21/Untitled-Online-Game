@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+using Mirror;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public Rigidbody rb; //reference player rigidbody
     public GameObject camHolder; //reference player game object 
@@ -23,11 +23,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)  
     {
-       move = context.ReadValue<Vector2>(); //this detects input along the vector and allows movement 
+        if (!isLocalPlayer) return;
+
+        move = context.ReadValue<Vector2>(); //this detects input along the vector and allows movement 
     }
 
     public void OnLook(InputAction.CallbackContext context) //Uses the new input system to call function when button pressed
     {
+        if (!isLocalPlayer) return;
+
         look = context.ReadValue<Vector2>(); //this detects input along the vector and allows look which controls where the player sees 
 
         InputDevice device = context.control.device; //this checks what device provided the input
@@ -46,15 +50,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (grounded) //if the player is on the ground
-        {
-          Move();  //call the move function
-        }        
+        if (!isLocalPlayer || !grounded) return;
+
+        Move();  //call the move function
+   
     }
 
    
     private void Start()
     {
+        if (!isLocalPlayer) return;
+
         Cursor.lockState = CursorLockMode.Locked; //locks the cursor when the game begins
         Cursor.visible = false; //ensure the cursor is not visible 
     }
@@ -76,6 +82,8 @@ public class PlayerController : MonoBehaviour
 
     void NormalLook()
     {
+        if (!isLocalPlayer) return;
+
         transform.Rotate(Vector3.up * look.x * currentSensitivity); //turns the camera around at the sensitivity set 
 
         lookRotation += (-look.y * currentSensitivity); //ensure that the the player up and down look is at the sensitivity set
@@ -87,6 +95,8 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!isLocalPlayer) return;
+
         NormalLook(); //call the normal look function
     }
 
