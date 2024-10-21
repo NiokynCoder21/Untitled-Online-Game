@@ -180,6 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158002356e1b1064396338e17370559e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   damage: 50
   range: 100
   muzzleflash: {fileID: 2989908942359130169}
@@ -572,7 +575,7 @@ RectTransform:
   - {fileID: 3350826293422028518}
   - {fileID: 4208129650525001319}
   - {fileID: 1483951227412530665}
-  m_Father: {fileID: 1442796733608943567}
+  m_Father: {fileID: 3057258429514861794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5842,8 +5845,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442796733608943567}
-  - component: {fileID: 2287546783405489752}
-  - component: {fileID: 3981755591739338530}
   m_Layer: 0
   m_Name: Player Stuff
   m_TagString: Untagged
@@ -5865,59 +5866,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3057258429514861794}
-  - {fileID: 2703856666014199608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2287546783405489752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5606885616388793593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 3371448040
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
---- !u!114 &3981755591739338530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5606885616388793593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 1442796733608943567}
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  onlySyncOnChange: 1
-  compressRotation: 1
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  timelineOffset: 1
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChangeCorrectionMultiplier: 2
-  rotationSensitivity: 0.01
-  positionPrecision: 0.01
-  scalePrecision: 0.01
 --- !u!1 &6437216317629869356
 GameObject:
   m_ObjectHideFlags: 0
@@ -6068,6 +6018,8 @@ GameObject:
   - component: {fileID: 2045593788691682643}
   - component: {fileID: 5781574775782623290}
   - component: {fileID: 3092527162908500129}
+  - component: {fileID: 5752292123312611996}
+  - component: {fileID: 854208441470643482}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: HandTorch
@@ -6090,6 +6042,7 @@ Transform:
   m_Children:
   - {fileID: 5168005561913885984}
   - {fileID: 5597546847250637011}
+  - {fileID: 2703856666014199608}
   m_Father: {fileID: 1442796733608943567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2603344992361277065
@@ -6311,6 +6264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd8a8bf7069a7441a8b36dbbce52741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   rb: {fileID: 2045593788691682643}
   camHolder: {fileID: 2662149039900643197}
   grounded: 0
@@ -6319,6 +6275,56 @@ MonoBehaviour:
   controllerSensitivty: 1
   currentSensitivity: 0
   maxForce: 1
+--- !u!114 &5752292123312611996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712666260850646481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 3057258429514861794}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
+--- !u!114 &854208441470643482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712666260850646481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 3371448040
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &8072478364660156528
 GameObject:
   m_ObjectHideFlags: 0

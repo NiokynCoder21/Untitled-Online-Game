@@ -63,6 +63,11 @@ public class PlayerController : NetworkBehaviour
 
         Cursor.lockState = CursorLockMode.Locked; //locks the cursor when the game begins
         Cursor.visible = false; //ensure the cursor is not visible 
+
+        if (!isLocalPlayer)
+        {
+            camHolder.gameObject.SetActive(false);
+        }
     }
 
     private void Move()

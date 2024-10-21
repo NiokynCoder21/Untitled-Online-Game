@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class Weapon : MonoBehaviour
+public class Weapon : NetworkBehaviour
 {
     public float damage = 50f; //this is the amount of damage the gun deals 
     public float range = 100f; //this is the range that the gun raycast shoots 
@@ -55,6 +56,7 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && !isReloading && !isShooting) //if fire button pressed(left mouse button), isreloading is false and isshooting is false
         {
+            if (!isLocalPlayer) return;
 
             if (currentAmmo > 0) //if current ammo is greater than zero
             {
@@ -78,6 +80,8 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && reloadAmount > 0) //if R is pressed , current ammo is less than max ammo and reload amount is more than zero
         {
+            if (!isLocalPlayer) return;
+
             StartCoroutine(Reload()); //start courtine to simulate player reloading
             reloadAmount--; //each time pressed reload amount reduces by 1
             UpdateAmmoUI(); //update ammo ui
@@ -87,6 +91,8 @@ public class Weapon : MonoBehaviour
 
     void Interaction()
     {
+        if (!isLocalPlayer) return;
+
         RaycastHit hit; //this will store what the raycast hit
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distance)) //shoots a raycast and checks if it hits 
@@ -113,6 +119,8 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        if (!isLocalPlayer) return;
+
         muzzleflash.Play(); //play muzzle flash particle system
 
         //RaycastHit hit;
@@ -157,6 +165,8 @@ public class Weapon : MonoBehaviour
 
     void UpdateAmmoUI()
     {
+        if (!isLocalPlayer) return;
+
         currentAmmoText.text = "" + currentAmmo; //display current ammo onto the screen
         maxAmmoText.text = "" + maxAmmo; //display max ammo onto the screen 
         magAmount.text = "" + reloadAmount; //display the reload amount on screen
