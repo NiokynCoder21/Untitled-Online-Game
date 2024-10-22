@@ -8,7 +8,6 @@ public class PlayerController : NetworkBehaviour
 {
     public Rigidbody rb; //reference player rigidbody
     public GameObject camHolder; //reference player game object 
-    public GameObject camera;
 
     private Vector2 move, look; //for movement and looking 
 
@@ -62,7 +61,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer)
         {
-            camera.gameObject.SetActive(false);
+            camHolder.gameObject.SetActive(false);
         }
 
         Cursor.lockState = CursorLockMode.Locked; //locks the cursor when the game begins

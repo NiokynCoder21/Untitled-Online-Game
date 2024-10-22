@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 3371448040
+  _assetId: 72461489
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
@@ -6498,6 +6498,7 @@ MonoBehaviour:
   cam: {fileID: 7746658679040812154}
   isShooting: 0
   magAmount: {fileID: 4889098061776381015}
+  UiStuff: {fileID: 403101836393756630}
 --- !u!82 &4667065964990844045
 AudioSource:
   m_ObjectHideFlags: 0

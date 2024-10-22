@@ -40,8 +40,16 @@ public class Weapon : NetworkBehaviour
     public bool isShooting = false; //bool to check if player is shooting
     public TextMeshProUGUI magAmount; //textmeshpro that shows the magamount
 
+    public GameObject UiStuff;
+
     private void Start()
     {
+        if (!isLocalPlayer)
+        {
+            UiStuff.gameObject.SetActive(false);
+            return;
+        }
+
         AudioSource audio = GetComponent<AudioSource>(); //get component audio source store as audio
         currentAmmo = maxAmmo; //set current ammo to max ammo
         reloadAmount = maxReload; //set reload amount to max relaod 
