@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 3056757949186124720}
   - component: {fileID: 7891853755114924610}
   m_Layer: 0
-  m_Name: Player (1)
+  m_Name: Player 1
   m_TagString: HandTorch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
