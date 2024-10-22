@@ -367,8 +367,8 @@ GameObject:
   m_Component:
   - component: {fileID: 910903190}
   - component: {fileID: 910903191}
-  - component: {fileID: 910903192}
   - component: {fileID: 910903193}
+  - component: {fileID: 910903192}
   m_Layer: 0
   m_Name: NeworkManager
   m_TagString: Untagged
@@ -429,7 +429,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 910903188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3ca2fd7b0aef9a4c8ce2a4f49d7b948, type: 3}
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 0
+  offsetY: 0
+--- !u!114 &910903193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910903188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
@@ -446,7 +460,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 2510835221855640931, guid: 545873929a2f76142b675ed328a74e6e,
+  playerPrefab: {fileID: 2510835221855640931, guid: 5f92d5df8b9769d4ab44599352b64ea1,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
@@ -466,23 +480,6 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
-  playerPrefabs:
-  - {fileID: 2510835221855640931, guid: 545873929a2f76142b675ed328a74e6e, type: 3}
-  - {fileID: 2510835221855640931, guid: 5f92d5df8b9769d4ab44599352b64ea1, type: 3}
---- !u!114 &910903193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910903188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetX: 0
-  offsetY: 0
 --- !u!1 &1114450917
 GameObject:
   m_ObjectHideFlags: 0
