@@ -10,8 +10,6 @@ public class MyNetworkManager : NetworkManager
     // List of spawn points (drag and drop in Inspector)
     public List<Transform> spawnPoints = new List<Transform>();
 
-    // Reference to the empty PlayerParent object
-    public Transform playerParent;
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
@@ -25,12 +23,10 @@ public class MyNetworkManager : NetworkManager
             // Instantiate the player prefab at the spawn point
             GameObject playerInstance = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
 
-            // Set the instantiated player prefab as a child of the playerParent
-            playerInstance.transform.SetParent(playerParent);
-
             // Register the player to the network connection
             NetworkServer.AddPlayerForConnection(conn, playerInstance);
         }
+
         else
         {
             Debug.LogWarning("Not enough prefabs or spawn points assigned in the lists.");
