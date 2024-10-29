@@ -1,42 +1,39 @@
-using System.Collections;
+using Mirror;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public class MyNetworkManager : NetworkManager
 {
-    public GameObject PlayerPrefab2;  // Prefab for Player 2
+    // List of player prefabs (drag and drop in Inspector)
+    public List<GameObject> playerPrefabs = new List<GameObject>();
 
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-        // We do not need to register any custom message handlers since the server decides
-    }
+    // List of spawn points (drag and drop in Inspector)
+    public List<Transform> spawnPoints = new List<Transform>();
 
-    // When a client connects, assign them a player prefab based on their connection order
+    // Reference to the empty PlayerParent object
+    public Transform playerParent;
+
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
-        GameObject gameobject;
+        // Check if there are enough prefabs and spawn points
+        if (numPlayers < playerPrefabs.Count && numPlayers < spawnPoints.Count)
+        {
+            // Select the prefab and spawn point for the player joining
+            GameObject playerPrefab = playerPrefabs[numPlayers];
+            Transform spawnPoint = spawnPoints[numPlayers];
 
-        if (numPlayers == 0)
-        {
-            // This is Player 1, spawn Prefab 1 (the default `playerPrefab`)
-            gameobject = Instantiate(playerPrefab);  // `playerPrefab` is from the NetworkManager
-            Debug.Log("Spawning Player 1 with Prefab 1");
-        }
-        else if (numPlayers == 1)
-        {
-            // This is Player 2, spawn Prefab 2
-            gameobject = Instantiate(PlayerPrefab2);  // Player 2 prefab
-            Debug.Log("Spawning Player 2 with Prefab 2");
+            // Instantiate the player prefab at the spawn point
+            GameObject playerInstance = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Set the instantiated player prefab as a child of the playerParent
+            playerInstance.transform.SetParent(playerParent);
+
+            // Register the player to the network connection
+            NetworkServer.AddPlayerForConnection(conn, playerInstance);
         }
         else
         {
-            Debug.LogError("More than 2 players connected!");
-            return;
+            Debug.LogWarning("Not enough prefabs or spawn points assigned in the lists.");
         }
-
-        // Add the player object to the connection
-        NetworkServer.AddPlayerForConnection(conn, gameobject);
     }
 }
