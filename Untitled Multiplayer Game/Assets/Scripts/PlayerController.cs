@@ -7,7 +7,8 @@ using Mirror;
 public class PlayerController : NetworkBehaviour
 {
     public Rigidbody rb; //reference player rigidbody
-    public GameObject camHolder; //reference player game object 
+    public GameObject Holder; //reference player game object 
+    public GameObject cameraOject;
 
     private Vector2 move, look; //for movement and looking 
 
@@ -61,7 +62,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer)
         {
-            camHolder.gameObject.SetActive(false);
+            cameraOject.gameObject.SetActive(false);
         }
 
         Cursor.lockState = CursorLockMode.Locked; //locks the cursor when the game begins
@@ -92,7 +93,7 @@ public class PlayerController : NetworkBehaviour
 
         lookRotation += (-look.y * currentSensitivity); //ensure that the the player up and down look is at the sensitivity set
         lookRotation = Mathf.Clamp(lookRotation, -90, 90); //clamps the rotation to -90 and 90 so it restricted between these two values
-        camHolder.transform.eulerAngles = new Vector3(lookRotation, camHolder.transform.eulerAngles.y, camHolder.transform.eulerAngles.z); //this sets the rotatation of camera holder
+        Holder.transform.eulerAngles = new Vector3(lookRotation, Holder.transform.eulerAngles.y, Holder.transform.eulerAngles.z); //this sets the rotatation of camera holder
                                                                                                                                            //so that it stays unchanged on the y and z and
                                                                                                                                            //only rotates on the x
     }
