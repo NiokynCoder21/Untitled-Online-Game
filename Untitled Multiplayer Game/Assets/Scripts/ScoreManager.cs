@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : NetworkBehaviour
 {
     public static ScoreManager Instance;
 
@@ -22,6 +23,8 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        if (!isLocalPlayer) return;
+
         score = 0;
         UpdateScoreText();
     }
@@ -29,6 +32,8 @@ public class ScoreManager : MonoBehaviour
 
     public void Points(int more)
     {
+        if (!isLocalPlayer) return;
+
         score += more;
         UpdateScoreText();
 
@@ -45,6 +50,8 @@ public class ScoreManager : MonoBehaviour
    
     private void UpdateScoreText()
     {
+        if (!isLocalPlayer) return;
+
         scoreText.text = "Score :" + score; //update text to show the current score
     }
 
