@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip hurtSound;
     public AudioClip zombieDeadSound;
     public GameObject enemy;
+    public ScoreManager score;
+    public int scorePoints;
 
     void Start()
     {
@@ -24,7 +26,13 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentEnergy <= 0) //if current energy is less than or equal to zero
         {
-            Destroy(enemy);
+           
+
+            if (score != null)
+            {
+                score.Points(scorePoints);
+                Destroy(enemy);
+            }
         }
     }
 
