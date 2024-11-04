@@ -21,13 +21,6 @@ public class EnemyHealth : MonoBehaviour
         audio.clip = hurtSound; //make the audio clip be emptygunsound
         audio.Play(); //play the audio clip be emptygunsound
 
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Vector3 pushBackDirection = -transform.forward; // direction to push back the player (opposite of forward direction)
-            rb.AddForce(pushBackDirection * pushBackForce, ForceMode.Impulse); // apply an impulse force to push back
-        }
-
         if (currentEnergy <= 0) //if current energy is less than or equal to zero
         {
             Destroy(this);

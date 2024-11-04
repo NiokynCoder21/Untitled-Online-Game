@@ -6,6 +6,7 @@ public class TextAppear : MonoBehaviour
 {
     public GameObject magPickUpText;
     public Weapon weapon;
+    public AudioClip pickUpSound;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -22,6 +23,9 @@ public class TextAppear : MonoBehaviour
                     weapon.SetCanPickUp(false);
                     magPickUpText.gameObject.SetActive(false);
                     weapon.hasPickedUp = false;
+                    AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
+                    audio.clip = pickUpSound; //make the audio clip be emptygunsound
+                    audio.Play(); //play the audio clip be emptygunsound
                     Destroy(other.gameObject);
                 }
             }
@@ -43,6 +47,9 @@ public class TextAppear : MonoBehaviour
                     weapon.SetCanPickUp(false);
                     magPickUpText.gameObject.SetActive(false);
                     weapon.hasPickedUp = false;
+                    AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
+                    audio.clip = pickUpSound; //make the audio clip be emptygunsound
+                    audio.Play(); //play the audio clip be emptygunsound
                     Destroy(other.gameObject);
                 }
             }
@@ -65,6 +72,9 @@ public class TextAppear : MonoBehaviour
                 weapon.SetCanPickUp(false);
                 magPickUpText.gameObject.SetActive(false);
                 weapon.hasPickedUp = false;
+                AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
+                audio.clip = pickUpSound; //make the audio clip be emptygunsound
+                audio.Play(); //play the audio clip be emptygunsound
                 Destroy(other.gameObject);
             }
         }
