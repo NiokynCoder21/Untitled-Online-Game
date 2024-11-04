@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Mirror;
+using UnityEngine.InputSystem;
 
 public class Weapon : NetworkBehaviour
 {
@@ -41,6 +42,21 @@ public class Weapon : NetworkBehaviour
     public TextMeshProUGUI magAmount; //textmeshpro that shows the magamount
 
     public GameObject UiStuff;
+    public bool canPickUpMag = false;
+    public bool hasPickedUp = false;
+
+    public void OnPickUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (canPickUpMag == true)
+            {
+                Interaction();
+                print("picked up");
+            }
+        }
+    }
+
 
     private void Start()
     {
@@ -60,7 +76,6 @@ public class Weapon : NetworkBehaviour
 
     private void Update()
     {
-        Interaction();
 
         if (Input.GetButtonDown("Fire1") && !isReloading && !isShooting) //if fire button pressed(left mouse button), isreloading is false and isshooting is false
         {
@@ -73,7 +88,6 @@ public class Weapon : NetworkBehaviour
                 audio.Play(); //play the audio clip gun sound
                 Shoot(); //call shoot method
                 StartCoroutine(FireRate()); //start courtine that simulates fire rate 
-                print("POLAYER SGOOTING");
             }
 
             else if (currentAmmo <= 0) //if current ammo is less than or equal to zero
@@ -97,32 +111,14 @@ public class Weapon : NetworkBehaviour
 
     }
 
-    void Interaction()
+    public void Interaction()
     {
         if (!isLocalPlayer) return;
 
-        RaycastHit hit; //this will store what the raycast hit
-
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distance)) //shoots a raycast and checks if it hits 
-        {
-            string hitTag = hit.collider.tag; //if hit something with tag store as hittag
-
-            if(hitTag == "Ammo") //check if hittag has the tag ammo
-            {
-                if (Input.GetKeyDown(KeyCode.I)) //if player presses I
-                {
-                    reloadAmount++; //increase the reloadamount the player has
-                    Destroy(ammo); //destroy the ammo gameobject
-                    UpdateAmmoUI(); //update ammo ui
-                }
-            }
-
-
-            if (hitTag == "win")
-            {
-                SceneManager.LoadScene("Winner", LoadSceneMode.Single);
-            }
-        }
+        reloadAmount++; //increase the reloadamount the player has
+        hasPickedUp = true;
+        UpdateAmmoUI(); //update ammo ui
+        print("more ammo");
     }
 
     void Shoot()
@@ -178,5 +174,10 @@ public class Weapon : NetworkBehaviour
         currentAmmoText.text = "" + currentAmmo; //display current ammo onto the screen
         maxAmmoText.text = "" + maxAmmo; //display max ammo onto the screen 
         magAmount.text = "" + reloadAmount; //display the reload amount on screen
+    }
+
+    public void SetCanPickUp(bool state)
+    {
+        canPickUpMag = state;
     }
 }

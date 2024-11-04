@@ -1073,6 +1073,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: aab2a81d-7aac-4fac-8f49-8e0d1e40a8f7
     m_ActionName: Player/Skip[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4322421891711259616}
+        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
+        m_MethodName: OnPickUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 402cb1f1-cdcb-4042-ae5e-d258a6e431d4
+    m_ActionName: Player/PickUp[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1271,6 +1287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magPickUpText: {fileID: 3781307214477929802}
+  weapon: {fileID: 4322421891711259616}
 --- !u!1 &3781307214477929802
 GameObject:
   m_ObjectHideFlags: 0
@@ -7125,12 +7142,13 @@ MonoBehaviour:
   maxAmmoText: {fileID: 1308694187042282210}
   isReloading: 0
   distance: 50
-  ammo: {fileID: 0}
+  ammo: {fileID: 699340167551894443, guid: 3dae0bf13529be641a75bb1631d02639, type: 3}
   fireRateInSec: 3
   cam: {fileID: 7746658679040812154}
   isShooting: 0
   magAmount: {fileID: 4889098061776381015}
   UiStuff: {fileID: 403101836393756630}
+  canPickUpMag: 0
 --- !u!82 &4667065964990844045
 AudioSource:
   m_ObjectHideFlags: 0
