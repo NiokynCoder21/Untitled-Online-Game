@@ -7317,7 +7317,7 @@ MonoBehaviour:
   isReloading: 0
   distance: 50
   ammo: {fileID: 699340167551894443, guid: 3dae0bf13529be641a75bb1631d02639, type: 3}
-  fireRateInSec: 3
+  fireRateInSec: 1
   cam: {fileID: 7746658679040812154}
   isShooting: 0
   magAmount: {fileID: 4889098061776381015}

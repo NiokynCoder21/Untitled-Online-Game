@@ -24,8 +24,6 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentEnergy <= 0) //if current energy is less than or equal to zero
         {
-            audio.clip = zombieDeadSound; //make the audio clip be emptygunsound
-            audio.Play(); //play the audio clip be emptygunsound
             Destroy(enemy);
         }
     }
