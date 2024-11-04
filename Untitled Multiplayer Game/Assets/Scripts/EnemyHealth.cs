@@ -26,13 +26,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentEnergy <= 0) //if current energy is less than or equal to zero
         {
-           
-
-            if (score != null)
-            {
-                score.Points(scorePoints);
-                Destroy(enemy);
-            }
+            ScoreManager.Instance.Points(scorePoints);
+            Destroy(enemy);
         }
     }
 
