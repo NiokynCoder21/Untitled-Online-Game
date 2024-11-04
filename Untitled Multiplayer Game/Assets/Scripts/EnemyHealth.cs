@@ -7,7 +7,8 @@ public class EnemyHealth : MonoBehaviour
     public float maxEnergy = 200; //max health in the game
     public float currentEnergy; //current health in the game
     public AudioClip hurtSound;
-    public float pushBackForce;
+    public AudioClip zombieDeadSound;
+    public GameObject enemy;
 
     void Start()
     {
@@ -23,7 +24,9 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentEnergy <= 0) //if current energy is less than or equal to zero
         {
-            Destroy(this);
+            audio.clip = zombieDeadSound; //make the audio clip be emptygunsound
+            audio.Play(); //play the audio clip be emptygunsound
+            Destroy(enemy);
         }
     }
 
