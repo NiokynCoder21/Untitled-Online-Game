@@ -45,6 +45,7 @@ public class Weapon : NetworkBehaviour
     public bool canPickUpMag = false;
     public bool hasPickedUp = false;
 
+    public EnemyHealth enemy;
     public void OnPickUp(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -127,20 +128,20 @@ public class Weapon : NetworkBehaviour
 
         muzzleflash.Play(); //play muzzle flash particle system
 
-        //RaycastHit hit;
+        RaycastHit hit;
 
             currentAmmo--;
             UpdateAmmoUI();
 
-       /* if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit ,range)) //ray cast from camera to a specified range and store what it hit in hit
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit ,range)) //ray cast from camera to a specified range and store what it hit in hit
         {
-            BadGuy badguy = hit.transform.GetComponent<BadGuy>(); //get component badguy from hit transform and store as badguy
+            EnemyHealth enemy = hit.transform.GetComponent<EnemyHealth>(); //get component badguy from hit transform and store as badguy
 
-            if (badguy != null) //does the object have the badhuy script 
+            if (enemy != null) //does the object have the badhuy script 
             {
-                badguy.TakeDamage(damage); //if yes pass damagae to it
+                enemy.LossEnergy(damage); //if yes pass damagae to it
             }
-        }*/
+        }
     }
 
     //Brackeys. (2017, April 19). Shooting with Raycasts - Unity tutorial. YouTube. https://youtu.be/THnivyG0Mvo?si=BK_QFrOeuHZNeGAD 
