@@ -9,9 +9,16 @@ public class ScoreManager : NetworkBehaviour
     public TMP_Text scoreText;
     public int score;
     public AudioClip[] scoreSounds;
+    public GameObject scoreStuff;
 
     void Start()
     {
+        if (!isLocalPlayer)
+        {
+            scoreStuff.gameObject.SetActive(false);
+            return;
+        }
+
         score = 0;
         UpdateScoreText();
     }
@@ -19,6 +26,8 @@ public class ScoreManager : NetworkBehaviour
 
     public void Points(int more)
     {
+        if (!isLocalPlayer) return;
+
         score += more;
         UpdateScoreText();
 
@@ -35,6 +44,8 @@ public class ScoreManager : NetworkBehaviour
    
     private void UpdateScoreText()
     {
+        if (!isLocalPlayer) return;
+
         scoreText.text = "Score :" + score; //update text to show the current score
     }
 

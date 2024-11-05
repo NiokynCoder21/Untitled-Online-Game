@@ -44,8 +44,8 @@ public class Weapon : NetworkBehaviour
     public GameObject UiStuff;
     public bool canPickUpMag = false;
     public bool hasPickedUp = false;
+    public GameObject scoreStuff;
 
-    public EnemyHealth enemy;
     public void OnPickUp(InputAction.CallbackContext context)
     {
         if (context.performed)
