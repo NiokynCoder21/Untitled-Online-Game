@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3572056629651894889}
   - component: {fileID: 1362254653248405547}
   - component: {fileID: 2178106071027806202}
-  - component: {fileID: 1237768663799856286}
-  - component: {fileID: 8956930861378933233}
+  - component: {fileID: 2246944482547890693}
+  - component: {fileID: 7304607656283528340}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -109,7 +109,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1237768663799856286
+--- !u!114 &2246944482547890693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,8 +124,10 @@ MonoBehaviour:
   maxEnergy: 200
   currentEnergy: 0
   hurtSound: {fileID: 8300000, guid: b89af1923f25b794b8bb5db400c1679c, type: 3}
-  pushBackForce: 15
---- !u!82 &8956930861378933233
+  zombieDeadSound: {fileID: 8300000, guid: bf45231b43d87f143911748cb9eac080, type: 3}
+  enemy: {fileID: 6330661224078193366}
+  scorePoints: 5
+--- !u!82 &7304607656283528340
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -650,6 +652,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4675222788032597294}
+  - component: {fileID: 6945078912713233399}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -681,6 +684,23 @@ Transform:
   - {fileID: 1702021689297858289}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6945078912713233399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6330661224078193366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1474905875
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &6478488421447735851
 GameObject:
   m_ObjectHideFlags: 0

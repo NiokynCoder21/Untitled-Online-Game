@@ -9,7 +9,6 @@ public class EnemyHealth : MonoBehaviour
     public AudioClip hurtSound;
     public AudioClip zombieDeadSound;
     public GameObject enemy;
-    public ScoreManager score;
     public int scorePoints;
 
     void Start()
@@ -24,11 +23,22 @@ public class EnemyHealth : MonoBehaviour
         audio.clip = hurtSound; //make the audio clip be emptygunsound
         audio.Play(); //play the audio clip be emptygunsound
 
-        if (currentEnergy <= 0) //if current energy is less than or equal to zero
+        GameObject player = GameObject.FindWithTag("Score");
+
+        if (player != null)
         {
-            ScoreManager.Instance.Points(scorePoints);
-            Destroy(enemy);
+            ScoreManager score = player.GetComponent<ScoreManager>();
+
+            if (currentEnergy <= 0) //if current energy is less than or equal to zero
+            {
+                if (score != null)
+                {
+                    score.Points(scorePoints);
+                    Destroy(enemy);
+                }
+            }
         }
+
     }
 
     //Brakeys.(2020, Febuary 9). How to make a Health bar in Unity![Video] https://www.youtube.com/watch?v=BLfNP4Sc_iA&list=PLt1E2jJc5nDj6KQi6BVJElz3vqFmg-B8I&index=4 
