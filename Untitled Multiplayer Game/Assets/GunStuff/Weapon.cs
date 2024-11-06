@@ -139,10 +139,26 @@ public class Weapon : NetworkBehaviour
 
             if (enemy != null) //does the object have the badhuy script 
             {
-                enemy.LossEnergy(damage); //if yes pass damagae to it
+                //enemy.LossEnergy(damage); //if yes pass damagae to it
+                CmdDealDamage(enemy.netIdentity, damage);
+                print("this one");
             }
         }
     }
+
+    [Command] // This will be called on the server
+    void CmdDealDamage(NetworkIdentity enemyNetId, float damageAmount)
+    {
+         EnemyHealth enemy = enemyNetId.GetComponent<EnemyHealth>();
+         print("got component");
+
+         if (enemy != null)
+         {
+             enemy.TakeDamage(damageAmount); // Apply damage on the server
+             print("commanded damage");
+         }
+    }
+
 
     //Brackeys. (2017, April 19). Shooting with Raycasts - Unity tutorial. YouTube. https://youtu.be/THnivyG0Mvo?si=BK_QFrOeuHZNeGAD 
 
