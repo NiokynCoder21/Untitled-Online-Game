@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class TextAppear : MonoBehaviour
+public class TextAppear : NetworkBehaviour
 {
     public GameObject magPickUpText;
     public Weapon weapon;
@@ -10,6 +11,8 @@ public class TextAppear : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (!isLocalPlayer) return;
+
         if (other.gameObject.CompareTag("Mag"))
         {
             magPickUpText.gameObject.SetActive(true);
@@ -26,7 +29,7 @@ public class TextAppear : MonoBehaviour
                     AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
                     audio.clip = pickUpSound; //make the audio clip be emptygunsound
                     audio.Play(); //play the audio clip be emptygunsound
-                    Destroy(other.gameObject);
+                    NetworkServer.Destroy(other.gameObject);
                 }
             }
         }
@@ -34,6 +37,8 @@ public class TextAppear : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (!isLocalPlayer) return;
+
         if (other.gameObject.CompareTag("Mag"))
         {
             magPickUpText.gameObject.SetActive(true);
@@ -50,7 +55,7 @@ public class TextAppear : MonoBehaviour
                     AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
                     audio.clip = pickUpSound; //make the audio clip be emptygunsound
                     audio.Play(); //play the audio clip be emptygunsound
-                    Destroy(other.gameObject);
+                    NetworkServer.Destroy(other.gameObject);
                 }
             }
         }
@@ -58,6 +63,7 @@ public class TextAppear : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+
         if (other.gameObject.CompareTag("Mag"))
         {
             magPickUpText.gameObject.SetActive(false);
@@ -75,8 +81,10 @@ public class TextAppear : MonoBehaviour
                 AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
                 audio.clip = pickUpSound; //make the audio clip be emptygunsound
                 audio.Play(); //play the audio clip be emptygunsound
-                Destroy(other.gameObject);
+                NetworkServer.Destroy(other.gameObject);
             }
         }
     }
+
+   
 }
