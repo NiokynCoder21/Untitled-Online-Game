@@ -13,10 +13,7 @@ public class EnemyAI : MonoBehaviour
     public float interestDuration = 5f; //float for intrest duration 
     private float timeSinceLastSighting = 0f; //float for time since last sighting
     public float rotationSpeed = 5f; //how fast the enemy rotates 
-
-    public Transform detectionObjects;
     private Vector3 lastknownPlayerPosition;
-    public float range = 200f; //how far the raycast is shot
    // public PlayerHealth playerHealth; //the player health script
 
     public enum EnemyState
@@ -28,36 +25,48 @@ public class EnemyAI : MonoBehaviour
         Stand,
     }
 
-    private EnemyState currentState;
+    public EnemyState currentState;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); //gets the navmesh component
         currentState = EnemyState.Patrol; //sets the state at the beginning of the game to EnemyState.Patrol
         SetNextWaypoint(); //calls the newway point function
-        AudioSource audio = GetComponent<AudioSource>(); //get audio component 
-        GameObject.FindGameObjectWithTag("Player"); //get gameobject with tag player
-       // playerHealth = GetComponent<PlayerHealth>(); //get script called playerhealth and store as playerHealth
+        player = null; // Set player to null initially
+     // playerHealth = GetComponent<PlayerHealth>(); //get script called playerhealth and store as playerHealth
     }
 
     void Update()
     {
-        switch (currentState)
+
+        if (player == null)
         {
-            case EnemyState.Patrol:
-                PatrolUpdate();
-                break;
-            case EnemyState.Chase:
-                ChaseUpdate();
-                break;
-            case EnemyState.Investigate:
-                InvestigateUpdate();
-                break;
-            case EnemyState.Stand:
-                StandUpdate();
-                break;
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
         }
 
+        if (player != null)
+        {
+            switch (currentState)
+            {
+                case EnemyState.Patrol:
+                    PatrolUpdate();
+                    break;
+                case EnemyState.Chase:
+                    ChaseUpdate();
+                    break;
+                case EnemyState.Investigate:
+                    InvestigateUpdate();
+                    break;
+                case EnemyState.Stand:
+                    StandUpdate();
+                    break;
+            }
+        }
 
     }
 
@@ -100,6 +109,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             timeSinceLastSighting += Time.deltaTime; //calculate time since last seen independant of frame rate
+            currentState = EnemyState.Stand;
         }
 
         if (timeSinceLastSighting < interestDuration) //if time since last seen is less than interest duration 
@@ -107,7 +117,7 @@ public class EnemyAI : MonoBehaviour
             if (currentState == EnemyState.Chase) //and if current state is enemy chase 
             {
                 MoveTowardsLastKnownPosition();
-                currentState = EnemyState.Stand; //change current state to stand state , so the player stays the the position they moved to
+                currentState = EnemyState.Patrol; //change current state to stand state , so the player stays the the position they moved to
             }
 
         }
@@ -136,7 +146,8 @@ public class EnemyAI : MonoBehaviour
 
         else
         {
-            currentState = EnemyState.Investigate; //else if cannot see player, set current state to investigate  
+            //currentState = EnemyState.Investigate; //else if cannot see player, set current state to investigate  
+            currentState = EnemyState.Patrol;
         }
     }
 
@@ -144,6 +155,8 @@ public class EnemyAI : MonoBehaviour
 
     bool CanSeePlayer()
     {
+        if (player == null) return false;
+
         Vector3 direction = player.position - transform.position; //this is the direction the enemy is facing , is calculated using a vector from the enemy to the player
         float distanceToPlayer = direction.magnitude; //calculates the distance from enemy to player using a staright line
 

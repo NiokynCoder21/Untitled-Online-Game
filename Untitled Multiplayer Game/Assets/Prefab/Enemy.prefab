@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 2335435657540794155}
   - component: {fileID: 6945078912713233399}
   - component: {fileID: 7055117203219555536}
+  - component: {fileID: 5603371754878886825}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -451,7 +452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6330661224078193366}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.04, y: -1.994, z: -0.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -464,6 +465,7 @@ Transform:
   - {fileID: 2182538050972482840}
   - {fileID: 8022499224175837047}
   - {fileID: 1702021689297858289}
+  - {fileID: 600943870229513802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4150344221128405493
@@ -695,6 +697,28 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5603371754878886825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6330661224078193366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8f48778a4918a419097103ee1dfd18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3437601077298102929, guid: 4c99439a1d880474daeebb601eb208e4, type: 3}
+  detectionRange: 30
+  patrolWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  interestDuration: 5
+  rotationSpeed: 10
+  detectionObjects: {fileID: 600943870229513802}
+  currentState: 0
 --- !u!1 &6478488421447735851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,3 +1139,43 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8550122278223513942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 600943870229513802}
+  - component: {fileID: 3310797283965901895}
+  m_Layer: 0
+  m_Name: Det Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &600943870229513802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550122278223513942}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.7758999, y: 0.27031505, z: -0.118785515}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4675222788032597294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3310797283965901895
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550122278223513942}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
