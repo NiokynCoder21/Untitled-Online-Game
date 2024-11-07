@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Mag
   - Score
+  - Human
   layers:
   - Default
   - TransparentFX
