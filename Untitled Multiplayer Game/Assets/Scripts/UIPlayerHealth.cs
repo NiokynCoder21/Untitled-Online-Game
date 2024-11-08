@@ -8,11 +8,6 @@ public class UIPlayerHealth : NetworkBehaviour
 {
     public TMP_Text healthText;
     private float currentHealth;
-    public GameObject uiStuffOne;
-    public GameObject uiStuffTwo;
-    public GameObject uiStuffThree;
-    public GameObject uiStuffFour;
-    public GameObject uiStuffFive;
     public GameObject uiManagerHealth;
 
     public void Start()

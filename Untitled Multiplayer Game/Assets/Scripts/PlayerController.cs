@@ -20,7 +20,7 @@ public class PlayerController : NetworkBehaviour
     public float currentSensitivity; //the players current sensitivity 
     private float lookRotation; //keep track of current look rotation
     public float maxForce; //the max force that can be applied on the playere
-
+    public static List<Transform> allPlayers = new List<Transform>();
 
     public void OnMove(InputAction.CallbackContext context)  
     {
@@ -60,14 +60,28 @@ public class PlayerController : NetworkBehaviour
    
     private void Start()
     {
+        if (isLocalPlayer)
+        {
+            allPlayers.Add(transform);
+        }
+
         if (!isLocalPlayer)
         {
             cameraOject.gameObject.SetActive(false);
         }
 
+
         Cursor.lockState = CursorLockMode.Locked; //locks the cursor when the game begins
         Cursor.visible = false; //ensure the cursor is not visible 
 
+    }
+
+    void OnDestroy()
+    {
+        if (isLocalPlayer)
+        {
+            allPlayers.Remove(transform); // Remove player from the list when they disconnect
+        }
     }
 
     private void Move()

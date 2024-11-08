@@ -715,12 +715,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   healthText: {fileID: 7426011689412680192}
-  uiStuffOne: {fileID: 0}
-  uiStuffTwo: {fileID: 0}
-  uiStuffThree: {fileID: 0}
-  uiStuffFour: {fileID: 0}
-  uiStuffFive: {fileID: 0}
-  uiManagerHealth: {fileID: 0}
+  uiManagerHealth: {fileID: 2409611320371304468}
 --- !u!1 &1538231754927252839
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform player;
     public float detectionRange = 20f; // Range to detect the player
     public List<Transform> patrolWaypoints; // List of patrol waypoints
     private NavMeshAgent agent; //the nav mesh agent
@@ -13,60 +12,41 @@ public class EnemyAI : MonoBehaviour
     public float interestDuration = 5f; //float for intrest duration 
     private float timeSinceLastSighting = 0f; //float for time since last sighting
     public float rotationSpeed = 5f; //how fast the enemy rotates 
+
+    public Transform detectionObjects;
     private Vector3 lastknownPlayerPosition;
-   // public PlayerHealth playerHealth; //the player health script
+    public float range = 200f; //how far the raycast is shot
+    public PlayerHealth playerHealth; //the player health script
 
     public enum EnemyState
     {
         Patrol,
         Chase,
-        Cover,
-        Investigate,
-        Stand,
     }
 
-    public EnemyState currentState;
+    private EnemyState currentState;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); //gets the navmesh component
         currentState = EnemyState.Patrol; //sets the state at the beginning of the game to EnemyState.Patrol
         SetNextWaypoint(); //calls the newway point function
-        player = null; // Set player to null initially
-     // playerHealth = GetComponent<PlayerHealth>(); //get script called playerhealth and store as playerHealth
+        AudioSource audio = GetComponent<AudioSource>(); //get audio component 
+        playerHealth = GetComponent<PlayerHealth>(); //get script called playerhealth and store as playerHealth
     }
 
     void Update()
     {
-
-        if (player == null)
+        switch (currentState)
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
-            if (playerObj != null)
-            {
-                player = playerObj.transform;
-            }
+            case EnemyState.Patrol:
+                PatrolUpdate();
+                break;
+            case EnemyState.Chase:
+                ChaseUpdate();
+                break;
         }
 
-        if (player != null)
-        {
-            switch (currentState)
-            {
-                case EnemyState.Patrol:
-                    PatrolUpdate();
-                    break;
-                case EnemyState.Chase:
-                    ChaseUpdate();
-                    break;
-                case EnemyState.Investigate:
-                    InvestigateUpdate();
-                    break;
-                case EnemyState.Stand:
-                    StandUpdate();
-                    break;
-            }
-        }
 
     }
 
@@ -87,67 +67,19 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void StandUpdate()
-    {
-        if (CanSeePlayer()) //if can see the player is yes
-        {
-            currentState = EnemyState.Chase; //if can see player chase the player
-        }
-    }
 
 
-    void InvestigateUpdate()
-    {
-        if (CanSeePlayer()) ////if can see the player is yes
-        {
-            lastknownPlayerPosition = player.position; //last known position is the players current position
-            timeSinceLastSighting = 0f;
-            currentState = EnemyState.Chase; //if the player seen then the enemy enters chase state
-            agent.destination = player.position; //the enemey moves to the players position
-        }
-
-        else
-        {
-            timeSinceLastSighting += Time.deltaTime; //calculate time since last seen independant of frame rate
-            currentState = EnemyState.Stand;
-        }
-
-        if (timeSinceLastSighting < interestDuration) //if time since last seen is less than interest duration 
-        {
-            if (currentState == EnemyState.Chase) //and if current state is enemy chase 
-            {
-                MoveTowardsLastKnownPosition();
-                currentState = EnemyState.Patrol; //change current state to stand state , so the player stays the the position they moved to
-            }
-
-        }
-    }
-
-
-    void MoveTowardsLastKnownPosition()
-    {
-        agent.destination = lastknownPlayerPosition; //moves enemy to last known position
-
-        Vector3 directionToPlayer = (lastknownPlayerPosition - transform.position).normalized;
-
-        // Calculate the target rotation based on the direction vector
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Interpolate between the current rotation and the target rotation
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-    }
     void ChaseUpdate()
     {
         if (CanSeePlayer()) //if can see the player is yes
         {
             currentState = EnemyState.Chase; //change current state to chase
-            agent.destination = player.position; //set enemy desitination to player position
+            agent.destination = lastknownPlayerPosition; //set enemy desitination to player position
         }
 
         else
         {
-            //currentState = EnemyState.Investigate; //else if cannot see player, set current state to investigate  
-            currentState = EnemyState.Patrol;
+            currentState = EnemyState.Patrol; //else if cannot see player, set current state to investigate  
         }
     }
 
@@ -155,22 +87,24 @@ public class EnemyAI : MonoBehaviour
 
     bool CanSeePlayer()
     {
-        if (player == null) return false;
-
-        Vector3 direction = player.position - transform.position; //this is the direction the enemy is facing , is calculated using a vector from the enemy to the player
-        float distanceToPlayer = direction.magnitude; //calculates the distance from enemy to player using a staright line
-
-        int layerMask = 8 << LayerMask.NameToLayer("Walls");
-        layerMask = ~layerMask; //exclude wall layer
-
-
-        if (distanceToPlayer <= detectionRange) //checks if the player is within the detection range
+        foreach (Transform player in PlayerController.allPlayers)
         {
+            Vector3 direction = player.position - transform.position; //this is the direction the enemy is facing , is calculated using a vector from the enemy to the player
+            float distanceToPlayer = direction.magnitude; //calculates the distance from enemy to player using a staright line
 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionRange, layerMask) && hit.collider.CompareTag("Player")) //shoots a raycast from the enemy position in the direction of the player to see if it hit anything and stores it in hit
+            int layerMask = 8 << LayerMask.NameToLayer("Walls");
+            layerMask = ~layerMask; //exclude wall layer
+
+
+            if (distanceToPlayer <= detectionRange) //checks if the player is within the detection range
             {
-                return true; //if raycast hit player true
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionRange, layerMask) && hit.collider.CompareTag("Player")) //shoots a raycast from the enemy position in the direction of the player to see if it hit anything and stores it in hit
+                {
+                    lastknownPlayerPosition = player.position;
+                    return true; //if raycast hit player true
+                }
             }
         }
 
