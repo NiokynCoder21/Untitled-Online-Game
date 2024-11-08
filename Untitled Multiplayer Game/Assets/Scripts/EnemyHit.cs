@@ -18,7 +18,17 @@ public class EnemyHit : NetworkBehaviour
             if (health != null)
             {
                 health.LessHealth(damageAmount);
-                NetworkServer.Destroy(enemy);
+
+
+                if (isServer)
+                {
+                    DestroyEnemy();
+                }
+                else
+                {
+                    // Tell the server to destroy the enemy
+                    CmdRequestEnemyDestroy();
+                }
 
             }
         }
@@ -35,8 +45,31 @@ public class EnemyHit : NetworkBehaviour
             {
                 print("less health");
                 health.LessHealth(damageAmount);
-                NetworkServer.Destroy(enemy);
+
+
+                if (isServer)
+                {
+                    DestroyEnemy();
+                }
+                else
+                {
+                    // Tell the server to destroy the enemy
+                    CmdRequestEnemyDestroy();
+                }
             }
         }
+    }
+
+    [Server]
+    private void DestroyEnemy()
+    {
+        NetworkServer.Destroy(enemy);
+    }
+
+    // Command to request the server to destroy the enemy
+    [Command]
+    private void CmdRequestEnemyDestroy()
+    {
+        DestroyEnemy();
     }
 }
