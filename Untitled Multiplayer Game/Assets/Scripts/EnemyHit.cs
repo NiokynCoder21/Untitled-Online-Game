@@ -5,7 +5,7 @@ using Mirror;
 
 public class EnemyHit : NetworkBehaviour
 {
-    public PlayerHealth health;
+    public UIPlayerHealth health;
     public float damageAmount;
     public GameObject enemy;
 
@@ -13,6 +13,8 @@ public class EnemyHit : NetworkBehaviour
     {
         if (collision.gameObject.CompareTag("Human"))
         {
+            health = collision.gameObject.GetComponent<UIPlayerHealth>();
+
             if (health != null)
             {
                 health.LessHealth(damageAmount);
@@ -27,6 +29,8 @@ public class EnemyHit : NetworkBehaviour
     {
         if (collision.gameObject.CompareTag("Human"))
         {
+            health = collision.gameObject.GetComponent<UIPlayerHealth>();
+
             if (health != null)
             {
                 print("less health");

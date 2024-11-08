@@ -374,7 +374,6 @@ GameObject:
   - component: {fileID: 5965099809242050557}
   - component: {fileID: 4952022238855913528}
   - component: {fileID: 5970330426962256581}
-  - component: {fileID: 2789668573353555901}
   - component: {fileID: 926822660369042952}
   m_Layer: 0
   m_Name: Player 1 (1)
@@ -700,26 +699,6 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &2789668573353555901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012698622150937561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93e7ba75ddeefd944a4fb51ce314feb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  maxHealth: 5
-  currentHealth: 5
-  damageAmount: 1
-  healthText: {fileID: 7426011689412680192}
-  hasStarted: 0
 --- !u!114 &926822660369042952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,7 +712,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 7426011689412680192}
-  health: {fileID: 2789668573353555901}
+  currentHealth: 0
+  maxHealth: 5
   uiStuffOne: {fileID: 7677092520653724909}
   uiStuffTwo: {fileID: 6056968204765964205}
   uiStuffThree: {fileID: 4073951064498102294}

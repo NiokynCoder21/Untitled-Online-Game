@@ -6,9 +6,7 @@ using TMPro;
 public class UIPlayerHealth : MonoBehaviour
 {
     public TMP_Text healthText;
-    public PlayerHealth health;
-    public float currentHealth;
-    public float maxHealth;
+    private float currentHealth;
     public GameObject uiStuffOne;
     public GameObject uiStuffTwo;
     public GameObject uiStuffThree;
@@ -17,15 +15,14 @@ public class UIPlayerHealth : MonoBehaviour
 
     public void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = 5;
         UpdateHealth();
-        print("Text Health:" + health.currentHealth);
+        print("Text Health:" + currentHealth);
+        //LessHealth(1);
     }
 
     private void Update()
     {
-        UpdateHealth();
-
         if (currentHealth == 4)
         {
             print("first done");
@@ -67,8 +64,8 @@ public class UIPlayerHealth : MonoBehaviour
 
     public void LessHealth(float loss)
     {
-        print("Current Health before: " + currentHealth);
         currentHealth -= loss;
+        UpdateHealth();
         print("Current Health after: " + currentHealth);
 
         if (currentHealth == 0)
@@ -80,8 +77,9 @@ public class UIPlayerHealth : MonoBehaviour
 
     public void UpdateHealth()
     {
-       // healthText.text = "" + health;
-        healthText.text = $"Health: {currentHealth}";
+        healthText.text = "" + currentHealth;
+
+        print("Current health now" + currentHealth);
     }
    
 }
