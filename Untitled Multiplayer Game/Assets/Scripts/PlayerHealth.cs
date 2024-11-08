@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using TMPro;
 
 public class PlayerHealth : NetworkBehaviour
 {
     public float maxHealth; //max health in the game
-    [SyncVar] public float currentHealth; //current health in the game
-
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
+    [SyncVar]public float currentHealth; //current health in the game
+    public float damageAmount = 1;
+    public TMP_Text healthText;
 
     [Server]
     public void LessHealth(float loss)
@@ -21,11 +19,13 @@ public class PlayerHealth : NetworkBehaviour
         currentHealth -= loss;
         print("Current Health after: " + currentHealth);
 
-        if (currentHealth < 0)
+        if (currentHealth == 0)
         {
-            print("Dead");
+            print("death");
         }
     }
+
+
 
     [ClientRpc]
     void RpcDie()

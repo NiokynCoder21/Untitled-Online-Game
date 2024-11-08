@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class EnemyHit : MonoBehaviour
+public class EnemyHit : NetworkBehaviour
 {
     public PlayerHealth health;
     public float damageAmount;
+    public GameObject enemy;
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -14,7 +16,8 @@ public class EnemyHit : MonoBehaviour
             if (health != null)
             {
                 health.LessHealth(damageAmount);
-                print("less health");
+                NetworkServer.Destroy(enemy);
+
             }
         }
     }
@@ -26,8 +29,9 @@ public class EnemyHit : MonoBehaviour
         {
             if (health != null)
             {
-                health.LessHealth(damageAmount);
                 print("less health");
+                health.LessHealth(damageAmount);
+                NetworkServer.Destroy(enemy);
             }
         }
     }
