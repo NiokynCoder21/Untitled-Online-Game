@@ -49,13 +49,26 @@ public class EnemyHealth : NetworkBehaviour
         AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
         audio.clip = hurtSound;
         audio.Play();
-        print("hit");
 
         // Check if energy is depleted
         if (currentEnergy <= 0)
         {
             HandleEnemyDeath();
             print("dead");
+        }
+    }
+
+    [Server]
+    public void Kamikazze(float damage)
+    {
+        currentEnergy -= damage;
+        AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
+        audio.clip = hurtSound;
+        audio.Play();
+
+        if (currentEnergy <= 0)
+        {
+            NetworkServer.Destroy(enemy);
         }
     }
 

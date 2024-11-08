@@ -8,68 +8,45 @@ public class EnemyHit : NetworkBehaviour
     public UIPlayerHealth health;
     public float damageAmount;
     public GameObject enemy;
+    public EnemyHealth enHealth;
+    public float deathAmount;
 
+    [Server]
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.Log($"Collision detected with: {collision.gameObject.name}, isServer: {isServer}");
+
         if (collision.gameObject.CompareTag("Human"))
         {
+            if (!isServer) return;
+
             health = collision.gameObject.GetComponent<UIPlayerHealth>();
 
-            if (health != null)
+            if (health != null && enHealth != null)
             {
                 health.LessHealth(damageAmount);
-
-
-                if (isServer)
-                {
-                    DestroyEnemy();
-                }
-                else
-                {
-                    // Tell the server to destroy the enemy
-                    CmdRequestEnemyDestroy();
-                }
-
-            }
-        }
-    }
-
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Human"))
-        {
-            health = collision.gameObject.GetComponent<UIPlayerHealth>();
-
-            if (health != null)
-            {
-                print("less health");
-                health.LessHealth(damageAmount);
-
-
-                if (isServer)
-                {
-                    DestroyEnemy();
-                }
-                else
-                {
-                    // Tell the server to destroy the enemy
-                    CmdRequestEnemyDestroy();
-                }
+                enHealth.Kamikazze(deathAmount);
             }
         }
     }
 
     [Server]
-    private void DestroyEnemy()
+    private void OnCollisionStay(Collision collision)
     {
-        NetworkServer.Destroy(enemy);
+        Debug.Log($"Collision detected with: {collision.gameObject.name}, isServer: {isServer}");
+
+        if (collision.gameObject.CompareTag("Human"))
+        {
+            if (!isServer) return;
+
+            health = collision.gameObject.GetComponent<UIPlayerHealth>();
+
+            if (health != null && enHealth != null)
+            {
+                health.LessHealth(damageAmount);
+                enHealth.Kamikazze(deathAmount);
+            }
+        }
     }
 
-    // Command to request the server to destroy the enemy
-    [Command]
-    private void CmdRequestEnemyDestroy()
-    {
-        DestroyEnemy();
-    }
 }
