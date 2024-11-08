@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class UIPlayerHealth : MonoBehaviour
+public class UIPlayerHealth : NetworkBehaviour
 {
     public TMP_Text healthText;
     private float currentHealth;
@@ -12,58 +13,26 @@ public class UIPlayerHealth : MonoBehaviour
     public GameObject uiStuffThree;
     public GameObject uiStuffFour;
     public GameObject uiStuffFive;
+    public GameObject uiManagerHealth;
 
     public void Start()
     {
+        if (!isLocalPlayer)
+        {
+            uiManagerHealth.gameObject.SetActive(false);
+            return;
+        }
+
         currentHealth = 5;
         UpdateHealth();
         print("Text Health:" + currentHealth);
-        //LessHealth(1);
     }
 
-    private void Update()
-    {
-        if (currentHealth == 4)
-        {
-            print("first done");
-
-            if (uiStuffFive != null)
-            {
-                uiStuffFive.gameObject.SetActive(false);
-            }
-            
-        }
-
-        if (currentHealth == 3)
-        {
-            print("second done");
-
-            if (uiStuffFour != null)
-            {
-                uiStuffFour.gameObject.SetActive(false);
-            }
-        }
-
-        if (currentHealth == 2)
-        {
-            if (uiStuffThree != null)
-            {
-                uiStuffThree.gameObject.SetActive(false);
-            }
-        }
-
-        if (currentHealth == 1)
-        {
-            if (uiStuffTwo != null)
-            {
-                uiStuffTwo.gameObject.SetActive(false);
-            }
-        }
-
-    }
 
     public void LessHealth(float loss)
     {
+        if (!isLocalPlayer) return;
+
         currentHealth -= loss;
         UpdateHealth();
         print("Current Health after: " + currentHealth);
@@ -77,6 +46,8 @@ public class UIPlayerHealth : MonoBehaviour
 
     public void UpdateHealth()
     {
+        if (!isLocalPlayer) return;
+
         healthText.text = "" + currentHealth;
 
         print("Current health now" + currentHealth);
