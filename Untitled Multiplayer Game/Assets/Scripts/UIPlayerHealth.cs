@@ -18,7 +18,7 @@ public class UIPlayerHealth : NetworkBehaviour
             return;
         }
 
-        currentHealth = 5;
+        currentHealth = 10;
         UpdateHealth();
         print("Text Health:" + currentHealth);
     }
