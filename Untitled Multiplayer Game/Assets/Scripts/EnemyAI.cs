@@ -10,7 +10,6 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent; //the nav mesh agent
     private int currentWaypointIndex = 0;
     public float interestDuration = 5f; //float for intrest duration 
-    private float timeSinceLastSighting = 0f; //float for time since last sighting
     public float rotationSpeed = 5f; //how fast the enemy rotates 
 
     public Transform detectionObjects;
