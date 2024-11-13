@@ -60,7 +60,7 @@ public class PlayerController : NetworkBehaviour
    
     private void Start()
     {
-        if (isLocalPlayer)
+        if (!allPlayers.Contains(transform))
         {
             allPlayers.Add(transform);
         }
