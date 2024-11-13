@@ -9,6 +9,7 @@ public class UIPlayerHealth : NetworkBehaviour
     public TMP_Text healthText;
     private float currentHealth;
     public GameObject uiManagerHealth;
+    public AudioClip hurtClip;
 
     public void Start()
     {
@@ -20,7 +21,6 @@ public class UIPlayerHealth : NetworkBehaviour
 
         currentHealth = 10;
         UpdateHealth();
-        print("Text Health:" + currentHealth);
     }
 
 
@@ -30,7 +30,9 @@ public class UIPlayerHealth : NetworkBehaviour
 
         currentHealth -= loss;
         UpdateHealth();
-        print("Current Health after: " + currentHealth);
+        AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
+        audio.clip = hurtClip;
+        audio.Play();
 
         if (currentHealth == 0)
         {
@@ -45,7 +47,6 @@ public class UIPlayerHealth : NetworkBehaviour
 
         healthText.text = "" + currentHealth;
 
-        print("Current health now" + currentHealth);
     }
    
 }

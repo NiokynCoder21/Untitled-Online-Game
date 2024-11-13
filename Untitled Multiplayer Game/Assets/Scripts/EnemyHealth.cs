@@ -7,8 +7,6 @@ public class EnemyHealth : NetworkBehaviour
 {
     public float maxEnergy = 200; //max health in the game
     public float currentEnergy; //current health in the game
-    public AudioClip hurtSound;
-    public AudioClip zombieDeadSound;
     public GameObject enemy;
     public int scorePoints;
 
@@ -17,38 +15,13 @@ public class EnemyHealth : NetworkBehaviour
         currentEnergy = maxEnergy; //set current health to max health
     }
 
-    /*public void LossEnergy(float energy) //function for when the player loses energy
-    {
-        currentEnergy -= energy; //this reduces energy from current energy and assigns the current energy
-        AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
-        audio.clip = hurtSound; //make the audio clip be emptygunsound
-        audio.Play(); //play the audio clip be emptygunsound
 
-        GameObject player = GameObject.FindWithTag("Score");
-
-        if (player != null)
-        {
-            ScoreManager score = player.GetComponent<ScoreManager>();
-
-            if (currentEnergy <= 0) //if current energy is less than or equal to zero
-            {
-                if (score != null)
-                {
-                    score.Points(scorePoints);
-                    Destroy(enemy);
-                }
-            }
-        }
-    }*/
 
     [Server] // Ensure this method only runs on the server
     public void TakeDamage(float damageAmount)
     {
         // Reduce the enemy's energy
         currentEnergy -= damageAmount;
-        AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
-        audio.clip = hurtSound;
-        audio.Play();
 
         // Check if energy is depleted
         if (currentEnergy <= 0)
@@ -63,8 +36,6 @@ public class EnemyHealth : NetworkBehaviour
     {
         currentEnergy -= damage;
         AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
-        audio.clip = hurtSound;
-        audio.Play();
 
         if (currentEnergy <= 0)
         {

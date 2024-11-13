@@ -1393,7 +1393,6 @@ GameObject:
   - component: {fileID: 5603371754878886825}
   - component: {fileID: 7140182361816559289}
   - component: {fileID: 6282526497638294992}
-  - component: {fileID: 2754302643752990202}
   - component: {fileID: 910449725284996962}
   m_Layer: 0
   m_Name: Enemy
@@ -1509,8 +1508,6 @@ MonoBehaviour:
   syncInterval: 0
   maxEnergy: 10
   currentEnergy: 0
-  hurtSound: {fileID: 8300000, guid: b89af1923f25b794b8bb5db400c1679c, type: 3}
-  zombieDeadSound: {fileID: 8300000, guid: bf45231b43d87f143911748cb9eac080, type: 3}
   enemy: {fileID: 6330661224078193366}
   scorePoints: 5
 --- !u!82 &2335435657540794155
@@ -1525,7 +1522,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1663,6 +1660,8 @@ MonoBehaviour:
   detectionRange: 10
   range: 200
   playerHealth: {fileID: 0}
+  groanSound: {fileID: 8300000, guid: 5d9342d8ce7838d4bbe7890d079fadf5, type: 3}
+  playInterval: 2
 --- !u!114 &7140182361816559289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,26 +1715,6 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
---- !u!114 &2754302643752990202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6330661224078193366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94776b2f16601a4f983b44813288e65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  health: {fileID: 926822660369042952, guid: 4c99439a1d880474daeebb601eb208e4, type: 3}
-  damageAmount: 1
-  enemy: {fileID: 6330661224078193366}
-  enHealth: {fileID: 8041349132377151981}
-  deathAmount: 10
 --- !u!114 &910449725284996962
 MonoBehaviour:
   m_ObjectHideFlags: 0

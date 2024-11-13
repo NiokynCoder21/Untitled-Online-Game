@@ -11,6 +11,10 @@ public class EnemyAI : MonoBehaviour
     public float range = 200f;
     public PlayerHealth playerHealth;
 
+    public AudioClip groanSound;
+    private bool isRunning = false;
+    public float playInterval;
+
     public enum EnemyState
     {
         Chase,
@@ -32,6 +36,11 @@ public class EnemyAI : MonoBehaviour
         if (currentState == EnemyState.Chase)
         {
             ChaseUpdate();
+        }
+
+        if (!isRunning)
+        {
+            StartCoroutine(PlaySoundEveryFewSeconds());
         }
     }
 
@@ -65,6 +74,19 @@ public class EnemyAI : MonoBehaviour
         }
 
         return false;
+    }
+
+    IEnumerator PlaySoundEveryFewSeconds()
+    {
+        isRunning = true;  // Set the flag to prevent multiple calls
+
+        while (true)  // Keep the coroutine running indefinitely
+        {
+            AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
+            audio.clip = groanSound;
+            audio.Play();
+            yield return new WaitForSeconds(playInterval);  // Wait for the specified interval
+        }
     }
 
 }
