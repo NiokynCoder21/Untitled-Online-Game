@@ -35,7 +35,6 @@ public class EnemyHealth : NetworkBehaviour
     public void Kamikazze(float damage)
     {
         currentEnergy -= damage;
-        AudioSource audio = GetComponent<AudioSource>(); //get component audio source and store as audio
 
         if (currentEnergy <= 0)
         {

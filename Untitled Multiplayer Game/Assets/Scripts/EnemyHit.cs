@@ -5,22 +5,17 @@ using Mirror;
 
 public class EnemyHit : NetworkBehaviour
 {
-    public UIPlayerHealth health;
     public float damageAmount;
     public GameObject enemy;
     public EnemyHealth enHealth;
     public float deathAmount;
 
-    [Server]
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Collision detected with: {collision.gameObject.name}, isServer: {isServer}");
 
         if (collision.gameObject.CompareTag("Human"))
         {
-            if (!isServer) return;
-
-            health = collision.gameObject.GetComponent<UIPlayerHealth>();
+            UIPlayerHealth health = collision.gameObject.GetComponentInChildren<UIPlayerHealth>();
 
             if (health != null && enHealth != null)
             {
@@ -30,14 +25,12 @@ public class EnemyHit : NetworkBehaviour
         }
     }
 
-    [Server]
     private void OnCollisionStay(Collision collision)
     {
-        Debug.Log($"Collision detected with: {collision.gameObject.name}, isServer: {isServer}");
-
+    
         if (collision.gameObject.CompareTag("Human"))
         {
-            if (!isServer) return;
+            UIPlayerHealth health = collision.gameObject.GetComponentInChildren<UIPlayerHealth>();
 
             health = collision.gameObject.GetComponent<UIPlayerHealth>();
 
