@@ -93,7 +93,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 55be94fe96ce185408e16d83b6ce666c, type: 3}
   - {fileID: 8300000, guid: 60cccc1760bfcf84c959860f587a9161, type: 3}
   - {fileID: 8300000, guid: 7bf6ef375c440b44ca4f311aaef9fcb6, type: 3}
-  scoreStuff: {fileID: 210269584772183389}
+  scoreStuff: {fileID: 1538231754927252839}
 --- !u!82 &5189215598331545093
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   cam: {fileID: 4370474219923314488}
   isShooting: 0
   magAmount: {fileID: 1910199014073979195}
-  UiStuff: {fileID: 7498078108149309434}
+  UiStuff: {fileID: 2506177462431769395}
   canPickUpMag: 0
   hasPickedUp: 0
   scoreStuff: {fileID: 1538231754927252839}
