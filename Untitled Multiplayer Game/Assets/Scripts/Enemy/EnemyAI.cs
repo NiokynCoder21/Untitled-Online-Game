@@ -9,7 +9,6 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 lastKnownPlayerPosition;
     public float range = 200f;
-    public PlayerHealth playerHealth;
 
     public AudioClip groanSound;
     private bool isRunning = false;
@@ -27,7 +26,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         currentState = EnemyState.Chase; // Set initial state to Chase
         AudioSource audio = GetComponent<AudioSource>();
-        playerHealth = GetComponent<PlayerHealth>();
         agent.updateRotation = false; //this allows me to control roatation
     }
 
