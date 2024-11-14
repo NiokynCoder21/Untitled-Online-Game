@@ -11,7 +11,6 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Wall")) //if the object does have wall tag, this to ensure it is not wall running
         {
             playerController.SetGrounded(true); //this is set grounded to true meaning the player is grounded
-           // playerController.SetCanAirMove(false);
         }
     }
 
@@ -20,7 +19,6 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Wall")) //if the object does have wall tag, this to ensure it is not wall running
         {
             playerController.SetGrounded(false); //this is set grounded to false meaning the player is grounded
-         // playerController.SetCanAirMove(true);
         }
     }
 
@@ -29,7 +27,6 @@ public class GroundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Wall")) //if the object does have wall tag, this to ensure it is not wall running
         {
             playerController.SetGrounded(true);  //this is set grounded to true meaning the player is grounded
-           // playerController.SetCanAirMove(false);
         }
     }
 

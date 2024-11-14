@@ -5,35 +5,33 @@ using Mirror;
 
 public class ScenceTransition : NetworkBehaviour
 {
-    public bool hasDisabled = false;
-
         [Server]
     public void TransitionToWinScreen()
     {
-        NetworkManager.singleton.ServerChangeScene("Win");
+        NetworkManager.singleton.ServerChangeScene("Win"); //changes server scence to win
     }
 
     public void TranstionLose()
     {
-        NetworkManager.singleton.ServerChangeScene("Lose");
+        NetworkManager.singleton.ServerChangeScene("Lose"); //changes server scence to lose
     }
 
     // Optional: You can call this from anywhere, just make sure it's called on the server
     [Command]
     public void CmdTransitionToWinScreen()
     {
-        if (isServer)
+        if (isServer) //if running on server
         {
-            TransitionToWinScreen();
+            TransitionToWinScreen(); //changes server scence to win
         }
     }
 
     [Command]
     public void CmdLose()
     {
-        if (isServer)
+        if (isServer) //if running on server
         {
-            TranstionLose();
+            TranstionLose(); //changes server scence to lose
         }
     }
 

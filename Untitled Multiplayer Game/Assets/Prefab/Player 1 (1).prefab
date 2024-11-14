@@ -651,6 +651,12 @@ MonoBehaviour:
   controllerSensitivty: 1
   currentSensitivity: 0
   maxForce: 1
+  sceneManager: {fileID: 5410286353319325800, guid: 9d83d864c2286234c8194e75d4b0f310,
+    type: 3}
+  musicManager: {fileID: 3886751686863848719, guid: 6eec44ff2c6ec0a47b9f427c77f64480,
+    type: 3}
+  enemyManager: {fileID: 3671895951292864624, guid: dc0990920f2d04243b1cade8db9572f7,
+    type: 3}
 --- !u!114 &4952022238855913528
 MonoBehaviour:
   m_ObjectHideFlags: 0

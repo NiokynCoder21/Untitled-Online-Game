@@ -6,10 +6,10 @@ using Mirror;
 
 public class ScoreManager : NetworkBehaviour
 {
-    public TMP_Text scoreText;
-    public int score;
-    public AudioClip[] scoreSounds;
-    public GameObject scoreStuff;
+    public TMP_Text scoreText; //the score text
+    public int score; //the score amount
+    public AudioClip[] scoreSounds; //the sounds that play when player gets a kill
+    public GameObject scoreStuff; //this is the score game object
 
     void Start()
     {
@@ -19,8 +19,8 @@ public class ScoreManager : NetworkBehaviour
             return;
         }
 
-        score = 0;
-        UpdateScoreText();
+        score = 0; //set inital score to zero
+        UpdateScoreText(); //updadate text to reflect score 
     }
 
 
@@ -28,8 +28,8 @@ public class ScoreManager : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        score += more;
-        UpdateScoreText();
+        score += more; //increase the score
+        UpdateScoreText(); //update text
 
         AudioSource audio1 = GetComponent<AudioSource>(); //get component audio source and store as audio
 

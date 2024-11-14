@@ -7,10 +7,10 @@ using TMPro;
 public class Timer : NetworkBehaviour
 {
     [SyncVar(hook = nameof(OnTimeChanged))]
-    public float timer = 300f; // Start with a 5-minute timer (300 seconds)
-    public ScenceTransition scence;
+    public float timer = 300f; //how long the timer is
+    public ScenceTransition scence; //transion script
 
-    public TMP_Text timerText; // Assign TimerText in the Inspector
+    public TMP_Text timerText; // timer text
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class Timer : NetworkBehaviour
         }
     }
 
-    // Only runs on the server
+
     [Server]
     private void UpdateTimer()
     {
@@ -28,27 +28,27 @@ public class Timer : NetworkBehaviour
         {
             timer -= 1f;
         }
+
         else
         {
             CancelInvoke(nameof(UpdateTimer));
             
             if (scence != null)
             {
-                scence.TransitionToWinScreen();
+                scence.TransitionToWinScreen(); //this transions 
             }
         }
     }
 
-    // This method is called whenever the timer SyncVar changes
     private void OnTimeChanged(float oldTime, float newTime)
     {
-        UpdateTimerText(newTime);
+        UpdateTimerText(newTime); //this updates the text
     }
 
     private void UpdateTimerText(float timeRemaining)
     {
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
-        timerText.text = $"{minutes:00}:{seconds:00}";
+        timerText.text = $"{minutes:00}:{seconds:00}"; //this displays the time in seconds and minues
     }
 }

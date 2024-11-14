@@ -9,17 +9,16 @@ public class EnemySpawner : NetworkBehaviour
     public Transform[] initialSpawnPoints; // Array of predefined spawn points
     public int initialEnemyCount; // Initial number of enemies
     public float spawnInterval; // Time interval for additional spawns
-    public bool isSpawn = false;
-    private Coroutine spawnRoutine;
+    public bool isSpawn = false; //has an enemy spawned yet
+    private Coroutine spawnRoutine; //this is so we use later
 
     public override void OnStartServer()
     {
         base.OnStartServer();
 
-        // Spawn initial enemies
         for (int i = 0; i < initialEnemyCount && i < initialSpawnPoints.Length; i++)
         {
-            SpawnEnemy(initialSpawnPoints[i].position);
+            SpawnEnemy(initialSpawnPoints[i].position); //spawn intital enemies at spawn points
         }
 
         StartSpawning();
@@ -33,7 +32,7 @@ public class EnemySpawner : NetworkBehaviour
     }
 
     [Server]
-    private IEnumerator SpawnAdditionalEnemies()
+    private IEnumerator SpawnAdditionalEnemies() //spawns enemies over an interval i have selected
     {
         while (isSpawn == true) // Infinite loop to spawn enemies indefinitely
         {
@@ -45,29 +44,29 @@ public class EnemySpawner : NetworkBehaviour
     }
 
     [Server]
-    public void StartSpawning()
+    public void StartSpawning() //this starts the spawning courtine function
     {
         if (spawnRoutine == null)
         {
-            isSpawn = true;
+            isSpawn = true; //spawning is true
             spawnRoutine = StartCoroutine(SpawnAdditionalEnemies());
         }
     }
 
     [Server]
-    public void StopSpawning()
+    public void StopSpawning() //a void that allows me to stop spawning
     {
         if (spawnRoutine != null)
         {
-            StopCoroutine(spawnRoutine);
+            StopCoroutine(spawnRoutine); //stop the spawning
             spawnRoutine = null;
-            isSpawn = false;
+            isSpawn = false; //spawning is false
         }
     }
 
     private Vector3 GetRandomSpawnPosition()
     {
-        Transform randomPoint = initialSpawnPoints[Random.Range(0, initialSpawnPoints.Length)];
-        return randomPoint.position;
+        Transform randomPoint = initialSpawnPoints[Random.Range(0, initialSpawnPoints.Length)]; 
+        return randomPoint.position; //gets a spawn position from the set points in the scence
     }
 }

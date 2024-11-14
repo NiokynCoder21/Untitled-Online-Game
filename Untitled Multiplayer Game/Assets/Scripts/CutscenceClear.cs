@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class CutscenceClear : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Update()
     {
-        // Find all GameObjects with the tag "Human"
-        GameObject[] humans = GameObject.FindGameObjectsWithTag("Human");
+        GameObject[] humans = GameObject.FindGameObjectsWithTag("Human"); //looks for all game object with the tag human
 
-        // Loop through each GameObject and destroy it
         foreach (GameObject human in humans)
         {
-            Destroy(human);
+            Destroy(human); //destroys all those objects 
         }
     }
 

@@ -41,19 +41,18 @@ public class Weapon : NetworkBehaviour
     public bool isShooting = false; //bool to check if player is shooting
     public TextMeshProUGUI magAmount; //textmeshpro that shows the magamount
 
-    public GameObject UiStuff;
-    public bool canPickUpMag = false;
-    public bool hasPickedUp = false;
-    public GameObject scoreStuff;
+    public GameObject UiStuff; //this ui elements game object
+    public bool canPickUpMag = false; //this is keep track of whether the player ca pick up mags or not
+    public bool hasPickedUp = false; //keep track on if a player has picked up a mag or not
+    public GameObject scoreStuff; //this is the score stuff game object
 
     public void OnPickUp(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (canPickUpMag == true)
+            if (canPickUpMag == true) //if player can pick up mag
             {
                 Interaction();
-                print("picked up");
             }
         }
     }
@@ -117,7 +116,7 @@ public class Weapon : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         reloadAmount++; //increase the reloadamount the player has
-        hasPickedUp = true;
+        hasPickedUp = true; //player has picked up
         UpdateAmmoUI(); //update ammo ui
         print("more ammo");
     }
@@ -131,7 +130,7 @@ public class Weapon : NetworkBehaviour
         RaycastHit hit;
 
             currentAmmo--;
-            UpdateAmmoUI();
+            UpdateAmmoUI(); //update text
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit ,range)) //ray cast from camera to a specified range and store what it hit in hit
         {
@@ -139,23 +138,19 @@ public class Weapon : NetworkBehaviour
 
             if (enemy != null) //does the object have the badhuy script 
             {
-                //enemy.LossEnergy(damage); //if yes pass damagae to it
                 CmdDealDamage(enemy.netIdentity, damage);
-                print("this one");
             }
         }
     }
 
-    [Command] // This will be called on the server
+    [Command]
     void CmdDealDamage(NetworkIdentity enemyNetId, float damageAmount)
     {
          EnemyHealth enemy = enemyNetId.GetComponent<EnemyHealth>();
-         print("got component");
 
          if (enemy != null)
          {
              enemy.TakeDamage(damageAmount); // Apply damage on the server
-             print("commanded damage");
          }
     }
 

@@ -8,7 +8,7 @@ public class PlayerController : NetworkBehaviour
 {
     public Rigidbody rb; //reference player rigidbody
     public GameObject Holder; //reference player game object 
-    public GameObject cameraOject;
+    public GameObject cameraOject; //this is the camera game object
 
     private Vector2 move, look; //for movement and looking 
 
@@ -20,7 +20,7 @@ public class PlayerController : NetworkBehaviour
     public float currentSensitivity; //the players current sensitivity 
     private float lookRotation; //keep track of current look rotation
     public float maxForce; //the max force that can be applied on the playere
-    public static List<Transform> allPlayers = new List<Transform>();
+    public static List<Transform> allPlayers = new List<Transform>(); //this will store player transforms
 
     public void OnMove(InputAction.CallbackContext context)  
     {
@@ -62,14 +62,13 @@ public class PlayerController : NetworkBehaviour
     {
         if (!allPlayers.Contains(transform))
         {
-            allPlayers.Add(transform);
+            allPlayers.Add(transform); //adds this players transform 
         }
 
         if (!isLocalPlayer)
         {
             cameraOject.gameObject.SetActive(false);
         }
-
 
         Cursor.lockState = CursorLockMode.Locked; //locks the cursor when the game begins
         Cursor.visible = false; //ensure the cursor is not visible 
