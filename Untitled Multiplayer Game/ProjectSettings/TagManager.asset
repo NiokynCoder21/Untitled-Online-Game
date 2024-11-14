@@ -9,6 +9,7 @@ TagManager:
   - Mag
   - Score
   - Human
+  - Zom
   layers:
   - Default
   - TransparentFX

@@ -7,8 +7,8 @@ public class EnemyHit : NetworkBehaviour
 {
     public float damageAmount;
     public GameObject enemy;
-    public EnemyHealth enHealth;
     public float deathAmount;
+
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -16,28 +16,40 @@ public class EnemyHit : NetworkBehaviour
         if (collision.gameObject.CompareTag("Human"))
         {
             UIPlayerHealth health = collision.gameObject.GetComponentInChildren<UIPlayerHealth>();
+            PlayerHurt hurt = collision.gameObject.GetComponent<PlayerHurt>();
 
-            if (health != null && enHealth != null)
+            if (health != null)
             {
                 health.LessHealth(damageAmount);
-                enHealth.Kamikazze(deathAmount);
+                print("enemy dead");
+
+                if (hurt != null)
+                {
+                    hurt.SetHasTaken(true);
+                }
             }
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-    
+
         if (collision.gameObject.CompareTag("Human"))
         {
             UIPlayerHealth health = collision.gameObject.GetComponentInChildren<UIPlayerHealth>();
 
             health = collision.gameObject.GetComponent<UIPlayerHealth>();
+            PlayerHurt hurt = collision.gameObject.GetComponent<PlayerHurt>();
 
-            if (health != null && enHealth != null)
+            if (health != null)
             {
                 health.LessHealth(damageAmount);
-                enHealth.Kamikazze(deathAmount);
+                print("enemy dead");
+
+                if (hurt != null)
+                {
+                    hurt.SetHasTaken(true);
+                }
             }
         }
     }

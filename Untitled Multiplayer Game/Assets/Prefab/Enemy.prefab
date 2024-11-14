@@ -1396,7 +1396,7 @@ GameObject:
   - component: {fileID: 910449725284996962}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Zom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1677,10 +1677,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  health: {fileID: 926822660369042952, guid: 4c99439a1d880474daeebb601eb208e4, type: 3}
   damageAmount: 1
   enemy: {fileID: 6330661224078193366}
-  enHealth: {fileID: 8041349132377151981}
   deathAmount: 10
 --- !u!114 &6282526497638294992
 MonoBehaviour:
