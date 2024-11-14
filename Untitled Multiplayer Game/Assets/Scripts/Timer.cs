@@ -7,7 +7,8 @@ using TMPro;
 public class Timer : NetworkBehaviour
 {
     [SyncVar(hook = nameof(OnTimeChanged))]
-    private float timer = 300f; // Start with a 5-minute timer (300 seconds)
+    public float timer = 300f; // Start with a 5-minute timer (300 seconds)
+    public ScenceTransition scence;
 
     public TMP_Text timerText; // Assign TimerText in the Inspector
 
@@ -30,7 +31,11 @@ public class Timer : NetworkBehaviour
         else
         {
             CancelInvoke(nameof(UpdateTimer));
-            // You could also trigger game over here if needed
+            
+            if (scence != null)
+            {
+                scence.TransitionToWinScreen();
+            }
         }
     }
 

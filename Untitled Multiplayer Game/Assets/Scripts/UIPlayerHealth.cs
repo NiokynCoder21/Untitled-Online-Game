@@ -10,6 +10,8 @@ public class UIPlayerHealth : NetworkBehaviour
     private float currentHealth;
     public GameObject uiManagerHealth;
     public AudioClip hurtClip;
+    public ScenceTransition scence;
+    public GameObject player;
 
     public void Start()
     {
@@ -19,7 +21,7 @@ public class UIPlayerHealth : NetworkBehaviour
             return;
         }
 
-        currentHealth = 10;
+        currentHealth = 15;
         UpdateHealth();
     }
 
@@ -36,7 +38,11 @@ public class UIPlayerHealth : NetworkBehaviour
 
         if (currentHealth == 0)
         {
-            print("death");
+            if (scence != null)
+            {
+                scence.TranstionLose();
+                Destroy(player);
+            }
         }
     }
 
