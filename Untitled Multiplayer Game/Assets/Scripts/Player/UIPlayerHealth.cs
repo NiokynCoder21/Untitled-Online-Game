@@ -10,8 +10,7 @@ public class UIPlayerHealth : NetworkBehaviour
     private float currentHealth; //stored for when we need to assign health to the player
     public GameObject uiManagerHealth; //this is ui game object
     public AudioClip hurtClip; //hurt clip sound
-    public ScenceTransition scence; //reference to scence script
-    public GameObject player; //player game object
+    private ScenceTransition scece;
 
     public void Start()
     {
@@ -23,6 +22,8 @@ public class UIPlayerHealth : NetworkBehaviour
 
         currentHealth = 10; //set the current health
         UpdateHealth(); //update text
+
+        scece = FindObjectOfType<ScenceTransition>();
     }
 
 
@@ -38,10 +39,10 @@ public class UIPlayerHealth : NetworkBehaviour
 
         if (currentHealth == 0)
         {
-            if (scence != null)
+            if (scece != null)
             {
-                scence.TranstionLose(); //transition all players to new scence
-                Destroy(player); //if player is not transitioned destroy them instead
+                scece.playerDead = true;
+                Destroy(this.gameObject);
             }
         }
     }
