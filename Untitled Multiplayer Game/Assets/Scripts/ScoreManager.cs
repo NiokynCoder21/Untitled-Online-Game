@@ -46,7 +46,7 @@ public class ScoreManager : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        scoreText.text = "Score :" + score; //update text to show the current score
+        scoreText.text = "Killed :" + score; //update text to show the current score
     }
 
 }

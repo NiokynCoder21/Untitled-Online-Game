@@ -1509,7 +1509,7 @@ MonoBehaviour:
   maxEnergy: 10
   currentEnergy: 0
   enemy: {fileID: 6330661224078193366}
-  scorePoints: 5
+  scorePoints: 1
 --- !u!82 &2335435657540794155
 AudioSource:
   m_ObjectHideFlags: 0
